@@ -1,7 +1,9 @@
 package application;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -10,33 +12,28 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class App extends Application {
- 
+
     public static void main(String[] args) {
-            launch(args);
-        }
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Stage stage = new Stage();
-        Group root = new Group();
-        Scene scene = new Scene(root, 1000, 1000, Color.GREY);
-        Image icon = new Image("icon.png");
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+            Scene scene = new Scene(root);
+            Image icon = new Image("icon.png");
 
 
-        Text title = new Text();
-        title.setText("Algorithm Visualizer");
-        title.setFont(Font.font("Verdana",50));
-        title.setFill(Color.WHITE);
-        title.setY(100);
-        title.setX(250);
-        root.getChildren().add(title);
+            // Setting Parameters of Stage
+            primaryStage.setResizable(false);
 
-        // Setting Parameters of Stage
-        stage.setResizable(false);
-
-        stage.getIcons().add(icon);
-        stage.setTitle("Algorithm Visualizer");
-        stage.setScene(scene);
-        stage.show();
+            primaryStage.getIcons().add(icon);
+            primaryStage.setTitle("Algorithm Visualizer");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
